@@ -1,0 +1,215 @@
+{% extends "app.layout.html" %}
+{% load staticfiles %}
+{% block main_content %}
+<!-- content-here -->
+<div class="content-container animated rotateInDownLeft" id="content">
+	<div class="page page-ui-tabs">
+		<div class="page-wrap">
+			<!-- row -->
+			<div class="row">
+				<!-- tabs-right -->
+				<div class="col-md-12 mb30">
+					<!-- tab style -->
+					<div class="clearfix tabs-right tabs-fill">
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a href="#tab-tweets" data-toggle="tab">visuals</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active animated rotateInDownRight" id="tab-tweets">
+								<div class="row clearfix">
+									<!-- List Groups -->
+									<div class="col-sm-12">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>National yearly Budget</span>
+                        <small class="pull-right">
+                          <a id="reset-submitted" href="#">reset</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="submitted-chart"></div>
+											</div>
+										</div>
+										<!-- #end panel -->
+									</div>
+									<!-- #end col -->
+								</div>
+                <div class="row clearfix">
+									<!-- List Groups -->
+									<div class="col-sm-4">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Category</span>
+                        <small class="pull-right">
+                          <a id="reset-category" href="#">reset</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="category-chart"></div>
+											</div>
+										</div>
+										<!-- #end panel -->
+									</div>
+									<!-- #end col -->
+									<div class="col-sm-3">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Location</span>
+                        <small class="pull-right">
+                          <a id="reset-location" href="#">reset</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="location-chart"></div>
+											</div>
+										</div>
+										<!-- #end panel -->
+									</div>
+									<!-- #end col -->
+									<div class="col-sm-3">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Defect</span>
+                        <small class="pull-right">
+                          <a id="reset-defect" href="#">reset</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="defect-chart"></div>
+											</div>
+										</div>
+										<!-- #end panel -->
+									</div>
+									<!-- #end col -->
+									<div class="col-sm-2">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Total Amount in Rands</span>
+                        <small class="pull-right">
+                          <a id="reset-all" href="#">reset-all</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="number-records-nd"></div>
+											</div>
+										</div>
+										<!-- #end panel -->
+									</div>
+									<!-- #end col -->
+									<div class="col-sm-2">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Reporter</span>
+                        <small class="pull-right">
+                          <a id="reset-reporter" href="#">reset</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="reporter-chart"></div>
+											</div>
+										</div>
+										<!-- #end panel -->
+									</div>
+									<!-- #end col -->
+								</div>
+
+							</div>
+							<div class="tab-pane animated rotateInDownRight" id="tab-employee">
+								<div class="row clearfix">
+									<!-- Data Table -->
+									<div class="col-md-3">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Status</span>
+                        <small class="pull-right">
+                          <a id="reset-status" href="#">reset</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="status-chart"></div>
+											</div>
+										</div>
+									</div>
+
+                  <div class="col-md-3">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Reason</span>
+                        <small class="pull-right">
+                          <a id="reset-reason" href="#">reset</a>
+                        </small>
+											</div>
+											<div class="panel-body">
+                        <div id="reason-chart"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Employee Name</span>
+                        <small class="pull-right">
+                          <a id="reset-name" href="#">reset</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="name-chart"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-sm-3">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Number of Cases</span>
+                        <small class="pull-right">
+                          <a id="reset-all1" href="#">reset-all</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="number-records-nd1"></div>
+											</div>
+										</div>
+										<!-- #end panel -->
+									</div>
+									<!-- #end col -->
+									<div class="col-md-3">
+										<div class="panel panel-default panel-hovered panel-stacked mb30">
+                      <div class="panel-heading">
+                        <span>Employee Job Title</span>
+                        <small class="pull-right">
+                          <a id="reset-title" href="#">reset</a>
+                        </small>
+                      </div>
+											<div class="panel-body">
+                        <div id="job-title-chart"></div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<!-- tab style -->
+					</div>
+					<!-- #end tabs-right -->
+				</div>
+				<!-- #end row -->
+
+			</div>
+			<!-- #end page-wrap -->
+		</div>
+		<!-- #end page -->
+	</div>
+	<!-- #end content-container -->
+	{% endblock main_content %}
+  {% block extra_js %}
+  <script src="{% static 'scripts/crossfilter.js' %}"></script>
+  <script src="{% static 'scripts/d3.min.js' %}"></script>
+  <script src="{% static 'scripts/dc.js' %}"></script>
+  <script src="{% static 'scripts/queue.js' %}"></script>
+  <script src="{% static 'scripts/faults.js' %}"></script>
+  {% endblock %}
