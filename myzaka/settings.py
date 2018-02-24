@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'myzaka.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myzaka',
+        'NAME': 'myzakadb',
         'USER': 'myzaka',
         'PASSWORD': 'myz\@k\@',
         'HOST': '',
