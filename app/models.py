@@ -21,7 +21,6 @@ class Municipalities(models.Model):
     phone_number = models.CharField(max_length=10)
     postal_address_1 = models.CharField(max_length=50)
     postal_address_2 = models.CharField(max_length=50)
-<<<<<<< HEAD
     postal_code = models.Charfield(max_length=4)
     province_name = models.Charfield(max_length=20)
     street_address_1 = models.Charfield(max_length=50)
@@ -87,10 +86,9 @@ class WastefulExpenditure(models.Model):
     demarcation_label
     financial_year_end
     item_label
-=======
-    postal_code  = models.CharField(max_length=4)
+    postal_code = models.CharField(max_length=4)
     province_name = models.CharField(max_length=20)
-    street_address_1  = models.CharField(max_length=50)
+    street_address_1 = models.CharField(max_length=50)
     street_address_2 = models.CharField(max_length=50)
     street_address_3 = models.CharField(max_length=30)
     website = models.CharField(max_length=30)
@@ -104,4 +102,3 @@ class Officials(models.Model):
     fax_number = models.CharField(max_length=10)
     phone_number = models.CharField(max_length=10)
     demarcation_code = models.CharField(max_length=6)
->>>>>>> origin/dev
