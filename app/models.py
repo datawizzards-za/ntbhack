@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 
 
 class Audits(models.Model):
-    demarcation_code = models.CharField(max_length=6)
-    financial_year_end = models.CharField(max_length=4)
-    opinion = models.CharField(max_length=100)
-    opinion_report_url = models.CharField(max_length=100)
+    demarcation_code = models.CharField(max_length=10)
+    demarcation_label = models.CharField(max_length=255)
+    financial_year_end = models.CharField(max_length=20)
+    opinion = models.CharField(max_length=255)
+    opinion_report_url = models.CharField(max_length=255)
 
 
 class Municipalities(models.Model):
@@ -30,13 +31,13 @@ class Municipalities(models.Model):
 
 
 class Officials(models.Model):
-    title = models.CharField(max_length=4)
-    role = models.CharField(max_length=30)
-    name = models.CharField(max_length=50)
-    email_address = models.CharField(max_length=50)
-    fax_number = models.CharField(max_length=20)
-    phone_number = models.CharField(max_length=20)
-    demarcation_code = models.CharField(max_length=6)
+    title = models.CharField(max_length=255)
+    role = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    email_address = models.CharField(max_length=255)
+    fax_number = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=255)
+    demarcation_code = models.CharField(max_length=255)
 
 
 class Maintenance(models.Model):
@@ -57,9 +58,9 @@ class CashFlow(models.Model):
 
 
 class BalanceSheet(models.Model):
-    amount = models.CharField(max_length=9) 
+    amount = models.CharField(max_length=9)
     demarcation_code = models.CharField(max_length=6)
-    demarcation_label=models.CharField(max_length=20)
+    demarcation_label = models.CharField(max_length=20)
     financial_year_end = models.CharField(max_length=4)
     item_label = models.CharField(max_length=25)
 
@@ -76,16 +77,16 @@ class IncomeExpense(models.Model):
     amount_type = models.CharField(max_length=25)
     financial_year_end = models.CharField(max_length=4)
     item_label = models.CharField(max_length=25)
-    demarcation_code=models.CharField(max_length=6)
-    demarcation_label=models.CharField(max_length=20)
+    demarcation_code = models.CharField(max_length=6)
+    demarcation_label = models.CharField(max_length=20)
 
 
 class WastefulExpenditure(models.Model):
     amount = models.CharField(max_length=9)
-    demarcation_code=models.CharField(max_length=6)
-    demarcation_label= models.CharField(max_length=20)
+    demarcation_code = models.CharField(max_length=6)
+    demarcation_label = models.CharField(max_length=20)
     financial_year_end = models.CharField(max_length=4)
-    item_label=models.CharField(max_length=25)
+    item_label = models.CharField(max_length=25)
     postal_code = models.CharField(max_length=4)
     province_name = models.CharField(max_length=20)
     street_address_1 = models.CharField(max_length=50)
