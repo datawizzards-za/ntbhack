@@ -8,26 +8,26 @@ from django.contrib.auth.models import User
 class Audits(models.Model):
     demarcation_code = models.CharField(max_length=10)
     demarcation_label = models.CharField(max_length=255)
-    financial_year_end = models.CharField(max_length=20)
+    financial_year_end = models.CharField(max_length=255)
     opinion = models.CharField(max_length=255)
     opinion_report_url = models.CharField(max_length=255)
 
 
 class Municipalities(models.Model):
-    area = models.CharField(max_length=9)
+    area = models.CharField(max_length=15)
     category = models.CharField(max_length=2)
-    demarcation_code = models.CharField(max_length=6)
+    demarcation_code = models.CharField(max_length=10)
     fax_number = models.CharField(max_length=20)
     name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)
-    postal_address_1 = models.CharField(max_length=50)
-    postal_address_2 = models.CharField(max_length=50)
-    postal_code = models.CharField(max_length=4)
+    postal_address_1 = models.CharField(max_length=100)
+    postal_address_2 = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=10)
     province_name = models.CharField(max_length=20)
-    street_address_1 = models.CharField(max_length=50)
-    street_address_2 = models.CharField(max_length=50)
-    street_address_3 = models.CharField(max_length=30)
-    website = models.CharField(max_length=30)
+    street_address_1 = models.CharField(max_length=255)
+    street_address_2 = models.CharField(max_length=255)
+    street_address_3 = models.CharField(max_length=255)
+    website = models.CharField(max_length=50)
 
 
 class Officials(models.Model):
@@ -37,59 +37,59 @@ class Officials(models.Model):
     email_address = models.CharField(max_length=255)
     fax_number = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
-    demarcation_code = models.CharField(max_length=255)
+    demarcation_code = models.CharField(max_length=10)
 
 
 class Maintenance(models.Model):
-    demarcation_code = models.CharField(max_length=6)
-    amount = models.CharField(max_length=9)
-    amount_type = models.CharField(max_length=15)
-    financial_period = models.CharField(max_length=4)
-    financial_year_end = models.CharField(max_length=4)
-    item_label = models.CharField(max_length=25)
+    demarcation_code = models.CharField(max_length=10)
+    amount = models.CharField(max_length=255)
+    amount_type = models.CharField(max_length=100)
+    financial_period = models.CharField(max_length=10)
+    financial_year_end = models.CharField(max_length=10)
+    item_label = models.CharField(max_length=255)
 
 
 class CashFlow(models.Model):
-    demarcation_code = models.CharField(max_length=6)
-    amount = models.CharField(max_length=9)
-    amount_type = models.CharField(max_length=15)
-    financial_year_end = models.CharField(max_length=4)
-    item_label = models.CharField(max_length=25)
+    demarcation_code = models.CharField(max_length=10)
+    amount = models.CharField(max_length=255)
+    amount_type = models.CharField(max_length=100)
+    financial_year_end = models.CharField(max_length=10)
+    item_label = models.CharField(max_length=255)
 
 
 class BalanceSheet(models.Model):
-    amount = models.CharField(max_length=9)
-    demarcation_code = models.CharField(max_length=6)
-    demarcation_label = models.CharField(max_length=20)
-    financial_year_end = models.CharField(max_length=4)
-    item_label = models.CharField(max_length=25)
+    amount = models.CharField(max_length=255)
+    demarcation_code = models.CharField(max_length=10)
+    demarcation_label = models.CharField(max_length=255)
+    financial_year_end = models.CharField(max_length=10)
+    item_label = models.CharField(max_length=255)
 
 
 class Capital(models.Model):
-    amount_type = models.CharField(max_length=15)
-    financial_year_end = models.CharField(max_length=4)
-    item_label = models.CharField(max_length=25)
-    demarcation_code = models.CharField(max_length=6)
-    demarcation_label = models.CharField(max_length=20)
+    amount_type = models.CharField(max_length=100)
+    financial_year_end = models.CharField(max_length=10)
+    item_label = models.CharField(max_length=255)
+    demarcation_code = models.CharField(max_length=10)
+    demarcation_label = models.CharField(max_length=255)
 
 
 class IncomeExpense(models.Model):
-    amount_type = models.CharField(max_length=25)
-    financial_year_end = models.CharField(max_length=4)
-    item_label = models.CharField(max_length=25)
-    demarcation_code = models.CharField(max_length=6)
-    demarcation_label = models.CharField(max_length=20)
+    amount_type = models.CharField(max_length=100)
+    financial_year_end = models.CharField(max_length=10)
+    item_label = models.CharField(max_length=255)
+    demarcation_code = models.CharField(max_length=10)
+    demarcation_label = models.CharField(max_length=255)
 
 
 class WastefulExpenditure(models.Model):
-    amount = models.CharField(max_length=9)
-    demarcation_code = models.CharField(max_length=6)
-    demarcation_label = models.CharField(max_length=20)
-    financial_year_end = models.CharField(max_length=4)
-    item_label = models.CharField(max_length=25)
-    postal_code = models.CharField(max_length=4)
+    amount = models.CharField(max_length=255)
+    demarcation_code = models.CharField(max_length=10)
+    demarcation_label = models.CharField(max_length=255)
+    financial_year_end = models.CharField(max_length=10)
+    item_label = models.CharField(max_length=255)
+    postal_code = models.CharField(max_length=10)
     province_name = models.CharField(max_length=20)
-    street_address_1 = models.CharField(max_length=50)
-    street_address_2 = models.CharField(max_length=50)
-    street_address_3 = models.CharField(max_length=30)
-    website = models.CharField(max_length=30)
+    street_address_1 = models.CharField(max_length=255)
+    street_address_2 = models.CharField(max_length=255)
+    street_address_3 = models.CharField(max_length=255)
+    website = models.CharField(max_length=50)
