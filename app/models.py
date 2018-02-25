@@ -26,8 +26,8 @@ class Municipalities(models.Model):
     province_name = models.CharField(max_length=20)
     street_address_1 = models.CharField(max_length=50)
     street_address_2 = models.CharField(max_length=50)
-    street_address_3 = models.CharField(max_length=30)
-    website = models.CharField(max_length=30)
+    street_address_3 = models.CharField(max_length=100)
+    website = models.CharField(max_length=100)
 
 
 class Officials(models.Model):
