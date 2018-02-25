@@ -126,7 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/app/case-man/'
+LOGIN_REDIRECT_URL = '/app/visuals/'
 
 LOGIN_URL = 'login'
 
