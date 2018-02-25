@@ -9,11 +9,14 @@ urlpatterns = [
 
     url(r'^visuals/$', views.Visuals.as_view(), name='visuals'),
     url(r'^notifs/$', views.Notifs.as_view(), name='notifs'),
-    url(r'^profile/$', views.Profile.as_view(), name='profile'),
     url(r'^load_employees_data/$', views.LoadEmployeesData.as_view(),
         name='load_employees_data'),
-    url(r'^api/api_auth/(?P<username>\w+)/(?P<password>.+)/',
-        views.LoginAuth.as_view(), name='api_auth'),
+
+    # API views
+    url(r'^api/get_munis/', api_views.GetMunis.as_view(), name='get_munis'),
+
+    # Profile views
+    url(r'^profile/$', views.Profile.as_view(), name='profile'),
     url(r'^login/$', auth_views.LoginView.as_view(
         template_name='login.html', form_class=forms.LoginForm),
         name='login'),
