@@ -70,6 +70,19 @@ class IncomeExpense(models.Model):
     demarcation_label = models.CharField(max_length=255)
 
 
+class Forecast(models.Model):
+    demarcation_code = models.CharField(max_length=255)
+    kpi = models.CharField(max_length=255)
+    forecast_period = models.CharField(max_length=255)
+    forecast_value = models.CharField(max_length=255)
+
+    def natural_key(self):
+        return (self.demarcation_code, self.kpi, self.forecast_period)
+
+    class Meta:
+        unique_together = (('demarcation_code', 'kpi', 'forecast_period'),)
+
+
 class WastefulExpenditure(models.Model):
     amount = models.CharField(max_length=255)
     demarcation_code = models.CharField(max_length=255)
