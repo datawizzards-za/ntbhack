@@ -13,7 +13,7 @@ urlpatterns = [
         name='load_employees_data'),
 
     # API views
-    url(r'^api/get_munis/', api_views.GetMunis.as_view(), name='get_munis'),
+    url(r'^api/get_data/', api_views.GetMunisData.as_view(), name='get_data'),
 
     # Profile views
     url(r'^profile/$', views.Profile.as_view(), name='profile'),

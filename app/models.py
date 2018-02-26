@@ -12,6 +12,13 @@ class Audits(models.Model):
     opinion = models.CharField(max_length=255)
     opinion_report_url = models.CharField(max_length=255)
 
+    def natural_key(self):
+        return (self.demarcation_code, self.financial_year_end, self.opinion)
+
+    class Meta:
+        unique_together = (
+            ('demarcation_code', 'financial_year_end', 'opinion'),)
+
 
 class Officials(models.Model):
     title = models.CharField(max_length=255)
@@ -33,9 +40,16 @@ class Maintenance(models.Model):
     demarcation_code = models.CharField(max_length=255)
     amount = models.CharField(max_length=255)
     amount_type = models.CharField(max_length=255)
-    financial_period = models.CharField(max_length=255)
     financial_year_end = models.CharField(max_length=255)
     item_label = models.CharField(max_length=255)
+
+    def natural_key(self):
+        return (self.demarcation_code, self.amount_type,
+                self.financial_year_end, self.item_label)
+
+    class Meta:
+        unique_together = (('demarcation_code', 'item_label', 'amount_type',
+                            'financial_year_end'),)
 
 
 class CashFlow(models.Model):
@@ -45,6 +59,15 @@ class CashFlow(models.Model):
     financial_year_end = models.CharField(max_length=255)
     item_label = models.CharField(max_length=255)
 
+    def natural_key(self):
+        return (self.demarcation_code, self.item_label,
+                self.financial_year_end, self.amount_type)
+
+    class Meta:
+        unique_together = (
+            ('demarcation_code', 'item_label',
+             'financial_year_end', 'amount_type'),)
+
 
 class BalanceSheet(models.Model):
     amount = models.CharField(max_length=255)
@@ -52,22 +75,52 @@ class BalanceSheet(models.Model):
     demarcation_label = models.CharField(max_length=255)
     financial_year_end = models.CharField(max_length=255)
     item_label = models.CharField(max_length=255)
+    amount_type = models.CharField(max_length=255)
+
+    def natural_key(self):
+        return (self.demarcation_code, self.item_label,
+                self.financial_year_end, self.amount_type)
+
+    class Meta:
+        unique_together = (
+            ('demarcation_code', 'item_label',
+             'financial_year_end', 'amount_type'),)
 
 
 class Capital(models.Model):
+    amount = models.CharField(max_length=255)
     amount_type = models.CharField(max_length=255)
     financial_year_end = models.CharField(max_length=255)
     item_label = models.CharField(max_length=255)
     demarcation_code = models.CharField(max_length=255)
     demarcation_label = models.CharField(max_length=255)
+
+    def natural_key(self):
+        return (self.demarcation_code, self.amount_type,
+                self.financial_year_end, self.item_label)
+
+    class Meta:
+        unique_together = (
+            ('demarcation_code', 'amount_type', 'financial_year_end',
+             'item_label'),)
 
 
 class IncomeExpense(models.Model):
+    amount = models.CharField(max_length=255)
     amount_type = models.CharField(max_length=255)
     financial_year_end = models.CharField(max_length=255)
     item_label = models.CharField(max_length=255)
     demarcation_code = models.CharField(max_length=255)
     demarcation_label = models.CharField(max_length=255)
+
+    def natural_key(self):
+        return (self.demarcation_code, self.amount_type,
+                self.financial_year_end, self.item_label)
+
+    class Meta:
+        unique_together = (
+            ('demarcation_code', 'amount_type', 'financial_year_end',
+             'item_label'),)
 
 
 class Forecast(models.Model):
@@ -90,6 +143,14 @@ class WastefulExpenditure(models.Model):
     financial_year_end = models.CharField(max_length=255)
     item_label = models.CharField(max_length=255)
 
+    def natural_key(self):
+        return (self.demarcation_code, self.item_label,
+                self.financial_year_end)
+
+    class Meta:
+        unique_together = (
+            ('demarcation_code', 'item_label', 'financial_year_end'),)
+
 
 class Municipalities(models.Model):
     area = models.CharField(max_length=255)
@@ -107,3 +168,11 @@ class Municipalities(models.Model):
     street_address_3 = models.CharField(max_length=255)
     website = models.CharField(max_length=255)
     officials = models.ManyToManyField(Officials)
+    balance_sheets = models.ManyToManyField(BalanceSheet)
+    audits = models.ManyToManyField(Audits)
+    cash_flows = models.ManyToManyField(CashFlow)
+    maintenance = models.ManyToManyField(Maintenance)
+    wasteful = models.ManyToManyField(WastefulExpenditure)
+    forecasts = models.ManyToManyField(Forecast)
+    capital = models.ManyToManyField(Capital)
+    income_expense = models.ManyToManyField(IncomeExpense)

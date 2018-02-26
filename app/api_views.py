@@ -9,7 +9,7 @@ from app import models
 from app import serializers
 
 
-class GetMunis(generics.ListCreateAPIView):
+class GetMunisData(generics.ListCreateAPIView):
     queryset = models.Municipalities.objects.all()
     serializer_class = serializers.MunicipalitySerializer
 
