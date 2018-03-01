@@ -1,42 +1,88 @@
 $(document).ready(function () {
     queue()
-        .defer(d3.json, "/app/api/get_all_faults/")
-        .defer(d3.json, "/app/api/all_cases/")
+        .defer(d3.json, "/app/api/get_data/")
         .awaitAll(handleData);
 
     function handleData(error, data) {
-        makeFaultsGraphs(data[0]);
-        makeCasesGraphs(data[1]);
+        graphKPIDashboard(data[0]);
     }
 
-    function makeFaultsGraphs(recordsJson) {
+    function graphKPIDashboard(recordsJson) {
         //Clean data
         var records = [];
         //var dateFormat = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ");
         var dateFormat = d3.time.format.iso;
 
-        recordsJson.forEach(function(d) {
-            var length = d['reporters'].length;
 
-            for (var i = 0; i < length; i++) {
-                tmp = {}
-                tmp["date_submitted"] = dateFormat.parse(d["date_submitted"]);
-                tmp["date_created"] = new Date(d["date_created"]);
-                tmp["date_submitted"].setMinutes(0);
-                tmp["date_submitted"].setSeconds(0);
-                tmp["category"] = d["category"];
-                tmp["defect"] = d["defect"];
-                tmp["location"] = d["location"];
-                var user = d['reporters'][i]['user'];
-                tmp["reporter"] = user['first_name'] + " " + user['last_name'];
-                records.push(tmp);
-            }
+        recordsJson.forEach(function (d) {
+            //var num_audits = d['audits'].length
+
+            ///for (var i = 0; i < length; i++) {
+            tmp = {}
+            tmp['category'] = d['category']
+            tmp['audits'] = d['audits']
+            records.push(tmp);
+
+
+            /*
+            tmp["date_submitted"] = dateFormat.parse(d["date_submitted"]);
+            tmp["date_created"] = new Date(d["date_created"]);
+            tmp["date_submitted"].setMinutes(0);
+            tmp["date_submitted"].setSeconds(0);
+            tmp["category"] = d["category"];
+            tmp["defect"] = d["defect"];
+            tmp["location"] = d["location"];
+            var user = d['reporters'][i]['user'];
+            tmp["reporter"] = user['first_name'] + " " + user['last_name'];
+            records.push(tmp);
+            }*/
         });
+
+        console.log(records);
 
         //Create a Crossfilter instance
         var ndx = crossfilter(records);
 
-        //Define Dimensions
+        var categoryDim = ndx.dimension(function (d) { return d["category"]; });
+        var auditsDim = ndx.dimension(function (d) { return d["audits"]; });
+
+        var categoryGroup = categoryDim.group();
+        //var auditsGroup = auditsDim.group();
+
+        var auditsGroup = auditsDim.group().reduceCount(function (d) { return d.opinion });
+
+        var categoryChart = dc.pieChart("#category-chart");
+        var auditsChart = dc.barChart("#audits-chart");
+
+        var charts_height = 250
+        categoryChart
+            .width(200)
+            .height(charts_height)
+            .dimension(categoryDim)
+            .group(categoryGroup)
+            .legend(dc.legend().x(210).y(20))
+            .innerRadius(20);
+
+        auditsChart
+            .width(350)
+            .height(charts_height)
+            .margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(auditsDim)
+            .group(auditsGroup)
+            .xUnits(dc.units.ordinal)
+            .controlsUseVisibility(true)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal().domain(["a", "b", "c"]))
+            .elasticY(true);
+        //.xAxisLabel("Years")
+        //.yAxisLabel("Amount in Rands");
+
+
+        dc.renderAll();
+
+        print_filter(auditsGroup);
+
+        /*/Define Dimensions
         var submittedDim = ndx.dimension(function (d) { return d["date_submitted"]; });
         var createdDim = ndx.dimension(function (d) { return d["date_created"]; });
         var categoryDim = ndx.dimension(function (d) { return d["category"]; });
@@ -277,5 +323,6 @@ $(document).ready(function () {
             titleChart.filterAll();
             dc.redrawAll();
         });
+        */
     }
 });

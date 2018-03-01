@@ -7,6 +7,7 @@ from app import forms
 urlpatterns = [
     # url(r'^createfaults/$', CreateFaults.as_view(), name='createfaults'),
 
+    url(r'^\Z$', views.Visuals.as_view(), name='visuals'),
     url(r'^visuals/$', views.Visuals.as_view(), name='visuals'),
     url(r'^notifs/$', views.Notifs.as_view(), name='notifs'),
     url(r'^load_employees_data/$', views.LoadEmployeesData.as_view(),
