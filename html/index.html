@@ -8,7 +8,7 @@
         <script src="raphael.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
         <script>
-            
+
 		$.getJSON( "map_data.json", function( data ) {
 			var paper = Raphael(0, 0, 2000, 2000);
 			var elementSet = paper.set();
@@ -34,24 +34,26 @@
 					animate(aus[i]);
 				      }
 				    };
-				*/	
+				*/
 			});
 
-			
+
 			$.each(sa, function(i, st) {
 				st.node.onclick = function() {
 					paper.clear();
 					//paper = Raphael(-2200, -500, 3000, 2000); Gauteng
 					//paper = Raphael(-1400, 100, 3000, 2000); Limpopo
-					paper = Raphael(-900, -500, 3000, 2000);
+					//paper = Raphael(-1400, -500, 3000, 2000); //Kwazulu Natal
+          //paper = Raphael(-600, -700, 3000, 2000); // Eastern Cape
+          paper = Raphael(-600, -200, 3000, 2000); // North west
 					//paper.canvas.setAttribute('preserveAspectRatio', 'none');
 					//paper.setSize('100%', '100%');
 					var attrs = {"type":"path","stroke":"none"};
 					var sa = {};
 					var provinces = paper.set();
 
-					$.getJSON( "freestate.json", function( data ) {
-										
+					$.getJSON("northwest.json", function( data ) {
+
 						   $.each(data, function(i, munic) {
 							attrs.fill = munic.color;
 							sa[munic.name] = paper.path(munic.path).attr(attrs);
@@ -59,8 +61,9 @@
 							sa[munic.name].name = munic.name;
 							//sa[munic.name].transform("s4.5,4.5 0,0"); Gauteng
 							//sa[munic.name].transform("s3,3 0,0"); Limpopo
-							sa[munic.name].transform("s3,3 0,0");
-
+							//sa[munic.name].transform("s2.5,2.5 0,0"); // Kwazulu Natal
+              //sa[munic.name].transform("s2,2 0,0"); //Eastern Cape
+              sa[munic.name].transform("s2.5,2.5 0,0"); // North West
 						   });
 
 					});
@@ -72,17 +75,17 @@
 					});
 					//console.log("Provinces: ", provinces);
                     //provinces.transform("s2,2 0,0");
-					
+
 				};
 			});
-	  	 
+
 		});
 
 
 	    /**
             var real_cape = paper.path().attr(attrs);
 	    //elementSet.push(real_cape);
-            
+
             //var western_cape = paper.path("").attr(attrs);
             //elementSet.push(western_cape);
 
@@ -93,15 +96,15 @@
             //elementSet.push(path);
 
             var limpopo = paper.path().attr(attrs);
-        
+
             var mpumalanga = paper.path().attr(attrs);
             //elementSet.push(path);
 
             var north_west = paper.path().attr(attrs);
             //elementSet.push(path);
-            
+
             var nothern_cape = paper.path().attr(attrs);
-            
+
             var gauteng = paper.path().attr(attrs);
 	    */
 
