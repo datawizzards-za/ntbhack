@@ -18,24 +18,24 @@
                                             <div class="panel-heading">
                                                 <span>Income & Expenditure</span>
                                                 <small class="pull-right">
-																							<a id="reset-income_expenditure" href="#">reset</a>
-																						</small>
+                                                    <a id="reset-income_expenditure" href="#">reset</a>
+                                                </small>
                                             </div>
                                             <div class="panel-body">
-                                                <div id="income_expenditure-chart"></div>
+                                                <!--<div id="income_expenditure-chart"></div>-->
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- #end panel --
-                                <!-- List Groups -->
+                                    <!-- #end panel -->
+                                    <!-- List Groups -->
                                     <div class="col-sm-12">
                                         <div class="panel panel-default panel-hovered panel-stacked mb30">
                                             <div class="panel-heading">
                                                 <span>Cash flow</span>
                                                 <small class="pull-right">
-																									
-																									<a id="reset-cash_flow" href="#">reset</a>
-																								</small>
+
+                                                    <a id="reset-cash_flow" href="#">reset</a>
+                                                </small>
 
                                             </div>
                                             <div class="panel-body">
@@ -50,8 +50,8 @@
                                             <div class="panel-heading">
                                                 <span>balance sheet</span>
                                                 <small class="pull-right">
-																									<a id="reset-balance" href="#">reset</a>
-																								</small>
+                                                    <a id="reset-balance" href="#">reset</a>
+                                                </small>
                                             </div>
                                             <div class="panel-body">
                                                 <div id="balance-chart"></div>
@@ -70,11 +70,12 @@
                                             <div class="panel-heading">
                                                 <span>National yearly Budget</span>
                                                 <small class="pull-right">
-																							<a id="reset-map" href="#">reset</a>
-																						</small>
+                                                    <a id="reset-map" href="#">reset</a>
+                                                </small>
                                             </div>
                                             <div class="panel-body">
-                                                <div id="map-chart"></div>
+                                                <!--<div id="map-chart"></div> -->
+                                                <div id="category-chart"></div>
                                             </div>
                                         </div>
                                         <!-- #end panel -->
@@ -85,8 +86,8 @@
                                                 <div class="panel-heading">
                                                     <span>Forecast</span>
                                                     <small class="pull-right">
-																											<a id="reset-forecast" href="#">reset</a>
-																										</small>
+                                                        <a id="reset-forecast" href="#">reset</a>
+                                                    </small>
                                                 </div>
                                                 <div class="panel-body">
                                                     <div id="forecast-chart"></div>
@@ -99,8 +100,8 @@
                                                 <div class="panel-heading">
                                                     <span>Contact Details</span>
                                                     <small class="pull-right">
-																											<a id="reset-contact" href="#">reset</a>
-																										</small>
+                                                        <a id="reset-contact" href="#">reset</a>
+                                                    </small>
                                                 </div>
                                                 <div class="panel-body">
                                                     <div id="contact-chart"></div>
@@ -117,11 +118,11 @@
                                             <div class="panel-heading">
                                                 <span>audit</span>
                                                 <small class="pull-right">
-																							<a id="reset-audit" href="#">reset</a>
-																						</small>
+                                                    <a id="reset-audit" href="#">reset</a>
+                                                </small>
                                             </div>
                                             <div class="panel-body">
-                                                <div id="audit-chart"></div>
+                                                <div id="audits-chart"></div>
                                             </div>
                                         </div>
                                         <!-- #end panel -->
@@ -133,8 +134,8 @@
                                             <div class="panel-heading">
                                                 <span>Wasteful Expenditure</span>
                                                 <small class="pull-right">
-																							<a id="reset-wasteful" href="#">reset</a>
-																						</small>
+                                                    <a id="reset-wasteful" href="#">reset</a>
+                                                </small>
                                             </div>
                                             <div class="panel-body">
                                                 <div id="wasteful-chart"></div>
@@ -147,8 +148,8 @@
                                             <div class="panel-heading">
                                                 <span>Capital</span>
                                                 <small class="pull-right">
-																									<a id="reset-capital" href="#">reset</a>
-																								</small>
+                                                    <a id="reset-capital" href="#">reset</a>
+                                                </small>
                                             </div>
                                             <div class="panel-body">
                                                 <div id="capital-chart"></div>
@@ -174,5 +175,5 @@
             <script src="{% static 'scripts/d3.min.js' %}"></script>
             <script src="{% static 'scripts/dc.js' %}"></script>
             <script src="{% static 'scripts/queue.js' %}"></script>
-            <script src="{% static 'scripts/faults.js' %}"></script>
-            {% endblock %}
+            <script src="{% static 'scripts/kpi_dashbords.js' %}"></script>
+            <script src="{% static 'scripts/print_filter.js' %}"></script> {% endblock %}

@@ -1,42 +1,109 @@
 $(document).ready(function () {
     queue()
-        .defer(d3.json, "/app/api/get_all_faults/")
-        .defer(d3.json, "/app/api/all_cases/")
+        .defer(d3.json, "/app/api/get_data/")
         .awaitAll(handleData);
 
     function handleData(error, data) {
-        makeFaultsGraphs(data[0]);
-        makeCasesGraphs(data[1]);
+        graphKPIDashboard(data[0]);
     }
 
-    function makeFaultsGraphs(recordsJson) {
+    function graphKPIDashboard(recordsJson) {
         //Clean data
         var records = [];
         //var dateFormat = d3.time.format("%Y-%m-%dT%H:%M:%S.%LZ");
         var dateFormat = d3.time.format.iso;
 
-        recordsJson.forEach(function(d) {
-            var length = d['reporters'].length;
 
-            for (var i = 0; i < length; i++) {
+        recordsJson.forEach(function (d) {
+
+            for (var i = 0; i < d['audits'].length; i++) {
                 tmp = {}
-                tmp["date_submitted"] = dateFormat.parse(d["date_submitted"]);
-                tmp["date_created"] = new Date(d["date_created"]);
-                tmp["date_submitted"].setMinutes(0);
-                tmp["date_submitted"].setSeconds(0);
-                tmp["category"] = d["category"];
-                tmp["defect"] = d["defect"];
-                tmp["location"] = d["location"];
-                var user = d['reporters'][i]['user'];
-                tmp["reporter"] = user['first_name'] + " " + user['last_name'];
+                tmp['category'] = d['category']
+                tmp['name'] = d['name']
+                tmp['audits_fy'] = d['audits'][i]['financial_year_end']
+                tmp['audit_opinion'] = d['audits'][i]['opinion']
+                tmp['wasteful_fy'] = d['wasteful'][i]['financial_year_end']
+                tmp['wasteful_amount'] = Number(d['wasteful'][i]['amount'])
+                tmp['wasteful_name'] = d['wasteful'][i]['item_label']
+
+                //console.log()
+
                 records.push(tmp);
             }
+
+
+            /*
+            tmp["date_submitted"] = dateFormat.parse(d["date_submitted"]);
+            tmp["date_created"] = new Date(d["date_created"]);
+            tmp["date_submitted"].setMinutes(0);
+            tmp["date_submitted"].setSeconds(0);
+            tmp["category"] = d["category"];
+            tmp["defect"] = d["defect"];
+            tmp["location"] = d["location"];
+            var user = d['reporters'][i]['user'];
+            tmp["reporter"] = user['first_name'] + " " + user['last_name'];
+            records.push(tmp);
+            }*/
         });
+
+        //console.log(records);
 
         //Create a Crossfilter instance
         var ndx = crossfilter(records);
 
-        //Define Dimensions
+        var categoryDim = ndx.dimension(function (d) { return d["category"]; });
+        var categoryGroup = categoryDim.group();
+        var charts_height = 150
+        dc.pieChart("#category-chart")
+            .width(200)
+            .height(charts_height)
+            .dimension(categoryDim)
+            .group(categoryGroup)
+            .legend(dc.legend().x(210).y(20))
+            .innerRadius(20);
+
+        var auditsFYDim = ndx.dimension(function (d) { return d["audits_fy"]; });
+        var auditsFYGroup = auditsFYDim.group();
+        dc.barChart("#audits-chart")
+            .width(200)
+            .height(charts_height)
+            //.margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(auditsFYDim)
+            .group(auditsFYGroup)
+            .controlsUseVisibility(true)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal().domain(["2011", "2012", "2013", "2014", "2015", "2016"]))
+            .xUnits(dc.units.ordinal)
+            //.xAxisLabel("Year")
+            //.yAxisLabel("Number of audits")
+            .barPadding(0.1)
+            .yAxis().ticks(5);
+
+        var wastefulFYDim = ndx.dimension(function (d) { return d["wasteful_fy"]; });
+        //var wastefulamountDim = ndx.dimension(function (d) { return d["wasteful_amount"]; });
+        var wastefulFYGroup = wastefulFYDim.group().reduceSum(function (d) { return d.wasteful_amount });
+        dc.barChart("#wasteful-chart")
+            .width(170)
+            .height(charts_height)
+            //.margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(wastefulFYDim)
+            .group(wastefulFYGroup)
+            .controlsUseVisibility(true)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal().domain(["2012", "2013", "2014", "2015"]))
+            .xUnits(dc.units.ordinal)
+            //.yAxis()
+            .barPadding(0.1)
+            .yAxis().ticks(5).tickFormat(d3.format('.1s'));
+        //.xAxisLabel("Year")
+        //.yAxisLabel("Number of audits");
+
+
+        dc.renderAll();
+
+        print_filter(wastefulFYGroup);
+
+        /*/Define Dimensions
         var submittedDim = ndx.dimension(function (d) { return d["date_submitted"]; });
         var createdDim = ndx.dimension(function (d) { return d["date_created"]; });
         var categoryDim = ndx.dimension(function (d) { return d["category"]; });
@@ -277,5 +344,6 @@ $(document).ready(function () {
             titleChart.filterAll();
             dc.redrawAll();
         });
+        */
     }
 });

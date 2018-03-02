@@ -24,3 +24,22 @@
 
 #category-chart svg { width: 500px; }
 #heatmap svg { width: 1450px; height: 450px;}
+
+#audits-chart .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#wasteful-chart .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+    font-weight: 300;
+}
+
+/*
+#wasteful-chart .y.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+    font-weight: 300;
+}
+*/
