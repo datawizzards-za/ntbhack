@@ -15,13 +15,21 @@ $(document).ready(function () {
 
 
         recordsJson.forEach(function (d) {
-            //var num_audits = d['audits'].length
 
-            ///for (var i = 0; i < length; i++) {
-            tmp = {}
-            tmp['category'] = d['category']
-            tmp['audits'] = d['audits']
-            records.push(tmp);
+            for (var i = 0; i < d['audits'].length; i++) {
+                tmp = {}
+                tmp['category'] = d['category']
+                tmp['name'] = d['name']
+                tmp['audits_fy'] = d['audits'][i]['financial_year_end']
+                tmp['audit_opinion'] = d['audits'][i]['opinion']
+                tmp['wasteful_fy'] = d['wasteful'][i]['financial_year_end']
+                tmp['wasteful_amount'] = Number(d['wasteful'][i]['amount'])
+                tmp['wasteful_name'] = d['wasteful'][i]['item_label']
+
+                //console.log()
+
+                records.push(tmp);
+            }
 
 
             /*
@@ -38,24 +46,15 @@ $(document).ready(function () {
             }*/
         });
 
-        console.log(records);
+        //console.log(records);
 
         //Create a Crossfilter instance
         var ndx = crossfilter(records);
 
         var categoryDim = ndx.dimension(function (d) { return d["category"]; });
-        var auditsDim = ndx.dimension(function (d) { return d["audits"]; });
-
         var categoryGroup = categoryDim.group();
-        //var auditsGroup = auditsDim.group();
-
-        var auditsGroup = auditsDim.group().reduceCount(function (d) { return d.opinion });
-
-        var categoryChart = dc.pieChart("#category-chart");
-        var auditsChart = dc.barChart("#audits-chart");
-
-        var charts_height = 250
-        categoryChart
+        var charts_height = 150
+        dc.pieChart("#category-chart")
             .width(200)
             .height(charts_height)
             .dimension(categoryDim)
@@ -63,24 +62,46 @@ $(document).ready(function () {
             .legend(dc.legend().x(210).y(20))
             .innerRadius(20);
 
-        auditsChart
-            .width(350)
+        var auditsFYDim = ndx.dimension(function (d) { return d["audits_fy"]; });
+        var auditsFYGroup = auditsFYDim.group();
+        dc.barChart("#audits-chart")
+            .width(200)
             .height(charts_height)
-            .margins({ top: 10, right: 50, bottom: 40, left: 40 })
-            .dimension(auditsDim)
-            .group(auditsGroup)
-            .xUnits(dc.units.ordinal)
+            //.margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(auditsFYDim)
+            .group(auditsFYGroup)
             .controlsUseVisibility(true)
             .transitionDuration(500)
-            .x(d3.scale.ordinal().domain(["a", "b", "c"]))
-            .elasticY(true);
-        //.xAxisLabel("Years")
-        //.yAxisLabel("Amount in Rands");
+            .x(d3.scale.ordinal().domain(["2011", "2012", "2013", "2014", "2015", "2016"]))
+            .xUnits(dc.units.ordinal)
+            //.xAxisLabel("Year")
+            //.yAxisLabel("Number of audits")
+            .barPadding(0.1)
+            .yAxis().ticks(5);
+
+        var wastefulFYDim = ndx.dimension(function (d) { return d["wasteful_fy"]; });
+        //var wastefulamountDim = ndx.dimension(function (d) { return d["wasteful_amount"]; });
+        var wastefulFYGroup = wastefulFYDim.group().reduceSum(function (d) { return d.wasteful_amount });
+        dc.barChart("#wasteful-chart")
+            .width(170)
+            .height(charts_height)
+            //.margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(wastefulFYDim)
+            .group(wastefulFYGroup)
+            .controlsUseVisibility(true)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal().domain(["2012", "2013", "2014", "2015"]))
+            .xUnits(dc.units.ordinal)
+            //.yAxis()
+            .barPadding(0.1)
+            .yAxis().ticks(5).tickFormat(d3.format('.1s'));
+        //.xAxisLabel("Year")
+        //.yAxisLabel("Number of audits");
 
 
         dc.renderAll();
 
-        print_filter(auditsGroup);
+        print_filter(wastefulFYGroup);
 
         /*/Define Dimensions
         var submittedDim = ndx.dimension(function (d) { return d["date_submitted"]; });
