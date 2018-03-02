@@ -5,7 +5,6 @@
         <title>Testing Raphael</title>
     </head>
     <body>
-        <h1>Testing Raphael</h1>
         <script src="raphael.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
         <script>
@@ -41,7 +40,7 @@
 			
 			$.each(sa, function(i, st) {
 				st.node.onclick = function() {
-					paper.clear(); 
+					paper.clear();
 					//paper = Raphael(-2200, -500, 3000, 2000); Gauteng
 					//paper = Raphael(-1400, 100, 3000, 2000); Limpopo
 					paper = Raphael(-900, -500, 3000, 2000);
@@ -51,7 +50,7 @@
 					var sa = {};
 					var provinces = paper.set();
 
-					$.getJSON( "Freestate.json", function( data ) {
+					$.getJSON( "freestate.json", function( data ) {
 										
 						   $.each(data, function(i, munic) {
 							attrs.fill = munic.color;
@@ -72,7 +71,7 @@
 						element.transform("s2");
 					});
 					//console.log("Provinces: ", provinces);
-				        //provinces.transform("s2,2 0,0");
+                    //provinces.transform("s2,2 0,0");
 					
 				};
 			});
