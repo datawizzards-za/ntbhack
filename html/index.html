@@ -42,21 +42,26 @@
 			$.each(sa, function(i, st) {
 				st.node.onclick = function() {
 					paper.clear(); 
-					paper = Raphael(-2200, -500, 3000, 2000);
+					//paper = Raphael(-2200, -500, 3000, 2000); Gauteng
+					//paper = Raphael(-1400, 100, 3000, 2000); Limpopo
+					paper = Raphael(-900, -500, 3000, 2000);
 					//paper.canvas.setAttribute('preserveAspectRatio', 'none');
 					//paper.setSize('100%', '100%');
 					var attrs = {"type":"path","stroke":"none"};    
 					var sa = {};
 					var provinces = paper.set();
 
-					$.getJSON( "gauteng.json", function( data ) {
+					$.getJSON( "Freestate.json", function( data ) {
 										
 						   $.each(data, function(i, munic) {
 							attrs.fill = munic.color;
 							sa[munic.name] = paper.path(munic.path).attr(attrs);
 							provinces.push(sa[munic.name]);
 							sa[munic.name].name = munic.name;
-							sa[munic.name].transform("s4.5,4.5 0,0");
+							//sa[munic.name].transform("s4.5,4.5 0,0"); Gauteng
+							//sa[munic.name].transform("s3,3 0,0"); Limpopo
+							sa[munic.name].transform("s3,3 0,0");
+
 						   });
 
 					});
