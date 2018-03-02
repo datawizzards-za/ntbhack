@@ -17,8 +17,8 @@
 
 			$.each(data, function(i, province) {
 				attrs.fill = province.color;
-			    	sa[province.name] = paper.path(province.path).attr(attrs);
-  				sa[province.name].name = province.name;
+			  sa[province.name] = paper.path(province.path).attr(attrs);
+  			sa[province.name].name = province.name;
 				/**
 				st.node.onclick = function () {
 				      this.state = 1 - this.state;
@@ -41,9 +41,13 @@
 			$.each(sa, function(i, st) {
 				st.node.onclick = function() {
 					paper.clear();
-					//paper = Raphael(-2200, -500, 3000, 2000); Gauteng
-					//paper = Raphael(-1400, 100, 3000, 2000); Limpopo
-					//paper = Raphael(-1400, -500, 3000, 2000); //Kwazulu Natal
+					//paper = Raphael(-2200, -500, 3000, 2000); // Gauteng
+					//paper = Raphael(-1400, 100, 3000, 2000); // Limpopo
+					//paper = Raphael(-900, -500, 3000, 2000); // Free State
+					//paper = Raphael(100, -200, 3000, 2000); // Northern Cape
+					//paper = Raphael(-2100, -200, 3000, 2000); // Mpumalanga
+					//paper = Raphael(0, -850, 3000, 2000); // Western Cape
+          //paper = Raphael(-1400, -500, 3000, 2000); //Kwazulu Natal
           //paper = Raphael(-600, -700, 3000, 2000); // Eastern Cape
           paper = Raphael(-600, -200, 3000, 2000); // North west
 					//paper.canvas.setAttribute('preserveAspectRatio', 'none');
@@ -52,20 +56,28 @@
 					var sa = {};
 					var provinces = paper.set();
 
-					$.getJSON("northwest.json", function( data ) {
+					//paper.canvas.setAttribute('preserveAspectRatio', 'none');
+					//paper.setSize('100%', '100%');
+					var attrs = {"type":"path","stroke":"none"};
+					var sa = {};
+					var provinces = paper.set();
 
-						   $.each(data, function(i, munic) {
-							attrs.fill = munic.color;
-							sa[munic.name] = paper.path(munic.path).attr(attrs);
-							provinces.push(sa[munic.name]);
-							sa[munic.name].name = munic.name;
-							//sa[munic.name].transform("s4.5,4.5 0,0"); Gauteng
-							//sa[munic.name].transform("s3,3 0,0"); Limpopo
-							//sa[munic.name].transform("s2.5,2.5 0,0"); // Kwazulu Natal
-              //sa[munic.name].transform("s2,2 0,0"); //Eastern Cape
-              sa[munic.name].transform("s2.5,2.5 0,0"); // North West
+					$.getJSON( "northwest.json", function( data ) {
+						    $.each(data, function(i, munic) {
+                                attrs.fill = munic.color;
+                                sa[munic.name] = paper.path(munic.path).attr(attrs);
+                                provinces.push(sa[munic.name]);
+                                sa[munic.name].name = munic.name;
+                                //sa[munic.name].transform("s4.5,4.5 0,0"); // Gauteng
+                                //sa[munic.name].transform("s3,3 0,0"); // Limpopo
+                                //sa[munic.name].transform("s3,3 0,0"); // Free State
+                                //sa[munic.name].transform("s2,2 0,0"); // Northern Cape
+                                //sa[munic.name].transform("s4,4 0,0"); // Mpumalanga
+                                //sa[munic.name].transform("s2.5,2.5 0,0"); // Western Cape
+                                //sa[munic.name].transform("s2.5,2.5 0,0"); // Kwazulu Natal
+                                //sa[munic.name].transform("s2,2 0,0"); //Eastern Cape
+                                sa[munic.name].transform("s2.5,2.5 0,0"); // North West
 						   });
-
 					});
 
 					console.log("Provinces: ", provinces);
