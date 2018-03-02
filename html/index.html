@@ -49,7 +49,7 @@
 					//paper = Raphael(0, -850, 3000, 2000); // Western Cape
           //paper = Raphael(-1400, -500, 3000, 2000); //Kwazulu Natal
           //paper = Raphael(-600, -700, 3000, 2000); // Eastern Cape
-          paper = Raphael(-600, -200, 3000, 2000); // North west
+          paper = Raphael(-600, -700, 3000, 2000); // North west
 					//paper.canvas.setAttribute('preserveAspectRatio', 'none');
 					//paper.setSize('100%', '100%');
 					var attrs = {"type":"path","stroke":"none"};
@@ -62,7 +62,7 @@
 					var sa = {};
 					var provinces = paper.set();
 
-					$.getJSON( "northwest.json", function( data ) {
+					$.getJSON("easterncape.json", function( data ) {
 						    $.each(data, function(i, munic) {
                                 attrs.fill = munic.color;
                                 sa[munic.name] = paper.path(munic.path).attr(attrs);
@@ -76,7 +76,7 @@
                                 //sa[munic.name].transform("s2.5,2.5 0,0"); // Western Cape
                                 //sa[munic.name].transform("s2.5,2.5 0,0"); // Kwazulu Natal
                                 //sa[munic.name].transform("s2,2 0,0"); //Eastern Cape
-                                sa[munic.name].transform("s2.5,2.5 0,0"); // North West
+                                sa[munic.name].transform("s2,2 0,0"); // North West
 						   });
 					});
 
