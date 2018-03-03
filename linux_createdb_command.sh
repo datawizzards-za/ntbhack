@@ -1,7 +1,8 @@
 #Ubuntu
 echo "Begin:create project db"
 echo "Installing requirements"
-pip install django psycopg2
+pip install django 
+pip install psycopg2
 echo "Deleting current db"
 sudo -i -u postgres psql -c "SELECT pg_terminate_backend(pg_stat_activity.pid)
 FROM pg_stat_activity
