@@ -21,11 +21,13 @@ $(document).ready(function () {
             audits_len = d['audits'].length
             wasteful_len = d['wasteful'].length
             maintenance_len = d['maintenance'].length
-            balance_sheets = d['maintenance'].length
-            maintenance_len = d['maintenance'].length
-            maintenance_len = d['maintenance'].length
-            maintenance_len = d['maintenance'].length
-            maintenance_len = d['maintenance'].length
+            balance_len = d['balance_sheets'].length
+            cash_len = d['cash_flows'].length
+            forecasts_len = d['forecasts'].length
+            capital_len = d['capital'].length
+            //maintenance_len = d['maintenance'].length
+            //maintenance_len = d['maintenance'].length
+            //maintenance_len = d['maintenance'].length
 
             var length = audits_len
             if (wasteful_len > length) {
@@ -34,12 +36,26 @@ $(document).ready(function () {
             if (maintenance_len > length) {
                 length = maintenance_len
             }
+            if (balance_len > length){
+                length = balance_len
+            }
+            if (cash_len > length) {
+                length = cash_len
+            }
+            if (forecasts_len > length) {
+                length = forecasts_len
+            }
+            if (capital_len > length) {
+                length = capital_len
+            }
 
             for (var i = 0; i < length; i++) {
                 console.log("Entering length loop");
                 tmp = {}
                 tmp['category'] = d['category']
                 tmp['name'] = d['name']
+
+
                 if (i < audits_len) {
                     tmp['audits_fy'] = d['audits'][i]['financial_year_end']
                     tmp['audit_opinion'] = d['audits'][i]['opinion']
@@ -47,6 +63,8 @@ $(document).ready(function () {
                     tmp['audits_fy'] = 'None'
                     tmp['audit_opinion'] = 'None'
                 }
+
+
                 if (i < wasteful_len) {
                     tmp['wasteful_fy'] = d['wasteful'][i]['financial_year_end']
                     tmp['wasteful_amount'] = Number(d['wasteful'][i]['amount'])
@@ -56,6 +74,8 @@ $(document).ready(function () {
                     tmp['wasteful_amount'] = 'None'
                     tmp['wasteful_name'] = 'None'
                 }
+
+
                 if (i < maintenance_len) {
                     tmp['maintenance_fy'] = d['maintenance'][i]['financial_year_end']
                     tmp['maintenance_amount'] = Number(d['maintenance'][i]['amount'])
@@ -68,6 +88,51 @@ $(document).ready(function () {
                     tmp['maintenance_type'] = 'None'
                 }
 
+                if (i < balance_len) {
+                    tmp['balance_fy'] = d['balance_sheets'][i]['financial_year_end']
+                    tmp['balance_amount'] = Number(d['balance_sheets'][i]['amount'])
+                    tmp['balance_name'] = d['balance_sheets'][i]['item_label']
+                    tmp['balance_type'] = d['balance_sheets'][i]['amount_type']
+                } else {
+                    tmp['balance_fy'] = 'None'
+                    tmp['balance_amount'] = 'None'
+                    tmp['balance_name'] = 'None'
+                    tmp['balance_type'] = 'None'
+                }
+                
+                if (i < cash_len) {
+                    tmp['cash_fy'] = d['cash_flows'][i]['financial_year_end']
+                    tmp['cash_amount'] = Number(d['cash_flows'][i]['amount'])
+                    tmp['cash_name'] = d['cash_flows'][i]['item_label']
+                    tmp['cash_type'] = d['cash_flows'][i]['amount_type']
+                } else {
+                    tmp['cash_fy'] = 'None'
+                    tmp['cash_amount'] = 'None'
+                    tmp['cash_name'] = 'None'
+                    tmp['cash_type'] = 'None'
+                }
+
+                if (i < forecasts_len) {
+                    tmp['forecasts_fy'] = d['forecasts'][i]['kpi']
+                    tmp['forecasts_period'] = d['forecasts'][i]['forecast_period']
+                    tmp['forecasts_value'] = d['forecasts'][i]['forecast_value']
+                } else {
+                    tmp['forecasts_fy'] = 'None'
+                    tmp['forecasts_period'] = 'None'
+                    tmp['forecasts_value'] = 'None'
+                }
+
+                if (i < capital_len) {
+                    tmp['capital_fy'] = d['capital'][i]['financial_year_end']
+                    tmp['capital_amount'] = Number(d['capital'][i]['amount'])
+                    tmp['capital_name'] = d['capital'][i]['item_label']
+                    tmp['capital_type'] = d['capital'][i]['amount_type']
+                } else {
+                    tmp['capital_fy'] = 'None'
+                    tmp['capital_amount'] = 'None'
+                    tmp['capital_name'] = 'None'
+                    tmp['capital_type'] = 'None'
+                }
                 records.push(tmp);
             }
             console.log("Leaving len loop");
@@ -105,6 +170,107 @@ $(document).ready(function () {
             .legend(dc.legend().x(210).y(20))
             .innerRadius(20);
 
+        var capitalFYDim = ndx.dimension(function (d) { return d["capital_fy"]; });
+        var capitalFYGroup = capitalFYDim.group();
+        var filteredCapitalGroup = {
+            all: function () {
+                return capitalFYGroup.top(Infinity).filter(function (d) {
+                    //console.log("#####", d.key);
+                    return d.key !== 'None';
+                });
+            }
+        }
+        dc.barChart("#capital-chart")
+            .width(200)
+            .height(charts_height)
+            //.margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(capitalFYDim)
+            .group(filteredCapitalGroup) //auditsFYGroup)
+            .controlsUseVisibility(true)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal().domain(["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"]))
+            .xUnits(dc.units.ordinal)
+            //.xAxisLabel("Year")
+            //.yAxisLabel("Number of audits")
+            .barPadding(0.1)
+            .yAxis().ticks(5);
+
+        var forecastsFYDim = ndx.dimension(function (d) { return d["forecasts_fy"]; });
+        var forecastsFYGroup = forecastsFYDim.group();
+        var filteredForecastsGroup = {
+            all: function () {
+                return forecastsFYGroup.top(Infinity).filter(function (d) {
+                    //console.log("#####", d.key);
+                    return d.key !== 'None';
+                });
+            }
+        }
+        dc.barChart("#forecast-chart")
+            .width(200)
+            .height(charts_height)
+            //.margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(forecastsFYDim)
+            .group(filteredForecastsGroup) //auditsFYGroup)
+            .controlsUseVisibility(true)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal().domain(["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"]))
+            .xUnits(dc.units.ordinal)
+            //.xAxisLabel("Year")
+            //.yAxisLabel("Number of audits")
+            .barPadding(0.1)
+            .yAxis().ticks(5);
+
+        var cashFYDim = ndx.dimension(function (d) { return d["cash_fy"]; });
+        var cashFYGroup = cashFYDim.group();
+        var filteredCashGroup = {
+            all: function () {
+                return cashFYGroup.top(Infinity).filter(function (d) {
+                    //console.log("#####", d.key);
+                    return d.key !== 'None';
+                });
+            }
+        }
+        dc.barChart("#cash_flow-chart")
+            .width(200)
+            .height(charts_height)
+            //.margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(cashFYDim)
+            .group(filteredCashGroup) //auditsFYGroup)
+            .controlsUseVisibility(true)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal().domain(["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"]))
+            .xUnits(dc.units.ordinal)
+            //.xAxisLabel("Year")
+            //.yAxisLabel("Number of audits")
+            .barPadding(0.1)
+            .yAxis().ticks(5);
+        
+
+        var balanceFYDim = ndx.dimension(function (d) { return d["balance_fy"]; });
+        var balanceFYGroup = balanceFYDim.group();
+        var filteredBalanceGroup = {
+            all: function () {
+                return balanceFYGroup.top(Infinity).filter(function (d) {
+                    //console.log("#####", d.key);
+                    return d.key !== 'None';
+                });
+            }
+        }
+        dc.barChart("#balance-chart")
+            .width(200)
+            .height(charts_height)
+            //.margins({ top: 10, right: 50, bottom: 40, left: 40 })
+            .dimension(balanceFYDim)
+            .group(filteredBalanceGroup) //auditsFYGroup)
+            .controlsUseVisibility(true)
+            .transitionDuration(500)
+            .x(d3.scale.ordinal().domain(["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"]))
+            .xUnits(dc.units.ordinal)
+            //.xAxisLabel("Year")
+            //.yAxisLabel("Number of audits")
+            .barPadding(0.1)
+            .yAxis().ticks(5);
+
         var maintenanceFYDim = ndx.dimension(function (d) { return d["maintenance_fy"]; });
         var maintenanceFYGroup = maintenanceFYDim.group();
         var filteredMaintenanceGroup = {
@@ -123,7 +289,7 @@ $(document).ready(function () {
             .group(filteredMaintenanceGroup) //auditsFYGroup)
             .controlsUseVisibility(true)
             .transitionDuration(500)
-            .x(d3.scale.ordinal().domain(["2011", "2012", "2013", "2014", "2015", "2016"]))
+            .x(d3.scale.ordinal().domain(["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016","2017","2018"]))
             .xUnits(dc.units.ordinal)
             //.xAxisLabel("Year")
             //.yAxisLabel("Number of audits")

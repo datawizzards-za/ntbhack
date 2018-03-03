@@ -1,6 +1,7 @@
 /** ================================================================ */
 
-#number-records-nd, #number-records-nd1 {
+#number-records-nd,
+#number-records-nd1 {
     font-size: 55px;
 }
 
@@ -10,20 +11,24 @@
 
 .dc-chart g.row text {
     fill: black;
-
 }
 
 .dc-chart g.pie text {
     fill: black;
-
 }
 
 #heatmap-chart {
     /*margin-left: 90px;*/
 }
 
-#category-chart svg { width: 500px; }
-#heatmap svg { width: 1450px; height: 450px;}
+#category-chart svg {
+    width: 500px;
+}
+
+#heatmap svg {
+    width: 1450px;
+    height: 450px;
+}
 
 #audits-chart .x.axis text {
     text-anchor: end !important;
@@ -33,8 +38,33 @@
 #wasteful-chart .x.axis text {
     text-anchor: end !important;
     transform: rotate(-45deg);
-    font-weight: 300;
 }
+
+#maintenance-chart .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#balance-chart .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#cash_flow-chart .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#forecast-chart .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
+#capital-chart .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+
 
 /*
 #wasteful-chart .y.axis text {

@@ -84,13 +84,13 @@
                                         <div class="col-sm-6">
                                             <div class="panel panel-default panel-hovered panel-stacked mb30">
                                                 <div class="panel-heading">
-                                                    <span>Forecast</span>
+                                                    <span>Capital</span>
                                                     <small class="pull-right">
-                                                        <a id="reset-forecast" href="#">reset</a>
+                                                        <a id="reset-capital" href="#">reset</a>
                                                     </small>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <div id="forecast-chart"></div>
+                                                    <div id="capital-chart"></div>
                                                 </div>
                                             </div>
                                             <!-- #end panel -->
@@ -146,34 +146,49 @@
                                     <div class="col-sm-12">
                                         <div class="panel panel-default panel-hovered panel-stacked mb30">
                                             <div class="panel-heading">
-                                                <span>Capital</span>
+                                                <span>maintenance</span>
                                                 <small class="pull-right">
-                                                    <a id="reset-capital" href="#">reset</a>
+                                                    <a id="reset-maintenance" href="#">reset</a>
                                                 </small>
                                             </div>
                                             <div class="panel-body">
-                                                <div id="capital-chart"></div>
+                                                <div id="maintenance-chart"></div>
                                             </div>
                                         </div>
                                         <!-- #end panel -->
                                     </div>
                                 </div>
-
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default panel-hovered panel-stacked mb30">
+                                        <div class="panel-heading">
+                                            <span>forcasting</span>
+                                            <small class="pull-right">
+																							<a id="reset-forcast" href="#">reset</a>
+																						</small>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="forcast-chart"></div>
+                                        </div>
+                                    </div>
+                                    <!-- #end panel -->
+                                </div>
                             </div>
-                            <!-- #end tabs-right -->
-                        </div>
-                        <!-- #end row -->
 
+                        </div>
+                        <!-- #end tabs-right -->
                     </div>
-                    <!-- #end page-wrap -->
+                    <!-- #end row -->
+
                 </div>
-                <!-- #end page -->
+                <!-- #end page-wrap -->
             </div>
-            <!-- #end content-container -->
-            {% endblock main_content %} {% block extra_js %}
-            <script src="{% static 'scripts/crossfilter.js' %}"></script>
-            <script src="{% static 'scripts/d3.min.js' %}"></script>
-            <script src="{% static 'scripts/dc.js' %}"></script>
-            <script src="{% static 'scripts/queue.js' %}"></script>
-            <script src="{% static 'scripts/kpi_dashbords.js' %}"></script>
-            <script src="{% static 'scripts/print_filter.js' %}"></script> {% endblock %}
+            <!-- #end page -->
+        </div>
+        <!-- #end content-container -->
+        {% endblock main_content %} {% block extra_js %}
+        <script src="{% static 'scripts/crossfilter.js' %}"></script>
+        <script src="{% static 'scripts/d3.min.js' %}"></script>
+        <script src="{% static 'scripts/dc.js' %}"></script>
+        <script src="{% static 'scripts/queue.js' %}"></script>
+        <script src="{% static 'scripts/kpi_dashbords.js' %}"></script>
+        <script src="{% static 'scripts/print_filter.js' %}"></script> {% endblock %}

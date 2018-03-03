@@ -15,6 +15,7 @@ urlpatterns = [
 
     # API views
     url(r'^api/get_data/', api_views.GetMunisData.as_view(), name='get_data'),
+    url(r'^api/get_bsdata/', api_views.GetBSData.as_view(), name='get_bsdata'),
 
     # Profile views
     url(r'^profile/$', views.Profile.as_view(), name='profile'),
