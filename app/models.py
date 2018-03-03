@@ -99,12 +99,13 @@ class Capital(models.Model):
 
     def natural_key(self):
         return (self.demarcation_code, self.amount_type,
-                self.financial_year_end, self.item_label)
+                self.financial_year_end, self.item_label, self.sum_new_assets,
+                self.sum_renewed_assets, self.sum_total_assets)
 
     class Meta:
         unique_together = (
             ('demarcation_code', 'amount_type', 'financial_year_end',
-             'item_label'),)
+             'item_label', 'sum_new_assets', 'sum_renewed_assets', 'sum_total_assets'),)
 
 
 class IncomeExpense(models.Model):
