@@ -39,13 +39,10 @@
 
 					var attrs = {"type":"path","stroke":"none"};
 					var sa = {};
-                    console.log(st.name);
 					var provinces = map_shapes[st.name].paper.set();
 
                     $.getJSON( filename, function( data ) {
                             $.each(data, function(i, munic) {
-                                console.log("Map shapes: ", map_shapes);
-                                console.log("Province: ", munic.province);
                                 attrs.fill = munic.color;
                                 sa[munic.name] = map_shapes[munic.province].paper.path(munic.path).attr(attrs);
                                 provinces.push(sa[munic.name]);
