@@ -1,10 +1,7 @@
 $(document).ready(function () {
-
     // Map Code
-    /**
-    $.getJSON( "../data/map_data.json", function( data ) {
-            console.log(data);
-			var paper = Raphael(0, 0, 2000, 2000);
+    $.getJSON( "../../static/data/map_data.json", function( data ) {
+			var paper = Raphael(350, 160, 2000, 2000);
 			var elementSet = paper.set();
 			var attrs = {"type":"path","stroke":"none"};
 			var sa = {}
@@ -19,7 +16,7 @@ $(document).ready(function () {
 			$.each(sa, function(i, st) {
 				st.node.onclick = function() {
 					paper.clear();
-                    var filename = "../data/" + st.name.toLowerCase().replace(" ", "") + ".json";
+                    var filename = "../../static/data/" + st.name.toLowerCase().replace(" ", "") + ".json";
                     var map_shapes = {
                         "Gauteng": {"transform": "s4.5,4.5 0,0", "paper": Raphael(-2200, -500, 3000, 2000)},
                         "Limpopo": {"transform": "s3,3 0,0", "paper": Raphael(-1400, 100, 3000, 2000)},
@@ -48,7 +45,6 @@ $(document).ready(function () {
                 };
 			});
 		});
-        */
     // End Map Cod
 
     console.log("Try getting API data");
