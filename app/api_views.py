@@ -9,6 +9,10 @@ from app import models
 from app import serializers
 
 
+class GetBSData(generics.ListCreateAPIView):
+    queryset = models.BalanceSheet.objects.all()
+    serializer_class = serializers.BSSerializer
+
 class GetMunisData(generics.ListCreateAPIView):
     queryset = models.Municipalities.objects.all()
     serializer_class = serializers.MunicipalitySerializer
