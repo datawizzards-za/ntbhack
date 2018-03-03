@@ -88,12 +88,14 @@ class BalanceSheet(models.Model):
 
 
 class Capital(models.Model):
-    amount = models.CharField(max_length=255)
     amount_type = models.CharField(max_length=255)
     financial_year_end = models.CharField(max_length=255)
     item_label = models.CharField(max_length=255)
     demarcation_code = models.CharField(max_length=255)
     demarcation_label = models.CharField(max_length=255)
+    sum_new_assets = models.CharField(max_length=255)
+    sum_renewed_assets = models.CharField(max_length=255)
+    sum_total_assets = models.CharField(max_length=255)
 
     def natural_key(self):
         return (self.demarcation_code, self.amount_type,
