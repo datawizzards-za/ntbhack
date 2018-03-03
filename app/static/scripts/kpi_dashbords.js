@@ -18,15 +18,15 @@ $(document).ready(function () {
 					paper.clear();
                     var filename = "../../static/data/" + st.name.toLowerCase().replace(" ", "") + ".json";
                     var map_shapes = {
-                        "Gauteng": {"transform": "s4.5,4.5 0,0", "paper": Raphael(-2200, -500, 3000, 2000)},
-                        "Limpopo": {"transform": "s3,3 0,0", "paper": Raphael(-1400, 100, 3000, 2000)},
-                        "Free State": {"transform": "s3,3 0,0", "paper": Raphael(-900, -500, 3000, 2000)},
-                        "Northern Cape": {"transform": "s2,2 0,0", "paper": Raphael(100, -200, 3000, 2000)},
-                        "Mpumalanga": {"transform": "s4,4 0,0", "paper": Raphael(-2100, -200, 3000, 2000)},
-                        "Western Cape": {"transform": "s2.5,2.5 0,0", "paper": Raphael(0, -850, 3000, 2000)},
-                        "KwaZulu Natal": {"transform": "s2.5,2.5 0,0", "paper": Raphael(-1400, -500, 3000, 2000)},
-                        "Eastern Cape": {"tranform": "s2,2 0,0", "paper": Raphael(0, 0, 3000, 2000)},
-                        "North West": {"transform": "s2.5,2.5 0,0", "paper": Raphael(-600, -200, 3000, 2000)}
+                        "Gauteng": {"transform": "s6,6 0,0", "paper": Raphael(-2650, -700, 4000, 2000)},
+                        "Limpopo": {"transform": "s3,3 0,0", "paper": Raphael(-1100, 200, 3000, 2000)},
+                        "Free State": {"transform": "s3,3 0,0", "paper": Raphael(-770, -500, 3000, 2000)},
+                        "Northern Cape": {"transform": "s1.5,1.5 0,0", "paper": Raphael(420, -30, 3000, 2000)},
+                        "Mpumalanga": {"transform": "s3.6,3.6 0,0", "paper": Raphael(-1650, -180, 3400, 2000)},
+                        "Western Cape": {"transform": "s2.5,2.5 0,0", "paper": Raphael(230, -850, 3000, 2000)},
+                        "KwaZulu Natal": {"transform": "s2.8,2.8 0,0", "paper": Raphael(-1200, -480, 3000, 2000)},
+                        "Eastern Cape": {"tranform": "s2,2 0,0", "paper": Raphael(300, 0, 3000, 2000)},
+                        "North West": {"transform": "s3,3 0,0", "paper": Raphael(-550, -180, 3000, 2000)}
                     }
 
 					var attrs = {"type":"path","stroke":"none"};
